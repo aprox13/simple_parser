@@ -47,16 +47,16 @@ class GraphParser:
             return self.__token
 
         start = self.__index - 1
-        if symbol.isalpha():
-            while self.__is_correct_bound() and self.__current().isalpha():
-                self.__next_char()
-
-            string = self.__expression[start: self.__index]
-            token = Token.find(string)
-            if token == Token.FAIL:
-                self.__name = string
-                return Token.NAME
-            return token
+        # if symbol.isalpha():
+        #     while self.__is_correct_bound() and self.__current().isalpha():
+        #         self.__next_char()
+        #
+        #     string = self.__expression[start: self.__index]
+        #     token = Token.find(string)
+        #     if token == Token.FAIL:
+        #         self.__name = string
+        #         return Token.NAME
+        #     return token
 
         if symbol.isdigit():
             while self.__is_correct_bound() and self.__current().isdigit():

@@ -5,7 +5,6 @@ class Token(Enum):
     FAIL = 0
     START = 1
     END = 2
-    NAME = 3
     CONST = 4
     P_EDGE = 5
     OPEN_EDGE = '{'
