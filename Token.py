@@ -7,19 +7,21 @@ class Token(Enum):
     END = 2
     NAME = 3
     CONST = 4
+    P_EDGE = 5
     OPEN_EDGE = '{'
     CLOSE_EDGE = '}'
     EDGE = '>'
     OPEN_BRACKET = '('
     CLOSE_BRACKET = ')'
     APOSTROPHE = '\''
+
+    # PARAMS
     SEPARATOR_EDGE_PARAMS = ':'
     LENGTH = 'l'
     LOCATION = 'n'
     WEIGHTS = 'w'
-    GENOM_NAME = 'g'
+    GENOME_NAME = 'g'
     UNIQ = 'u'
-    P_EDGE = 5
 
     @staticmethod
     def find(symbol: str):

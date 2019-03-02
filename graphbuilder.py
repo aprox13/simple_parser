@@ -11,7 +11,6 @@ class Graph:
         self.not_normal = []
 
     def build(self, from_parser: list):
-        # print(str(from_parser))
 
         res = [[], []]
         NAME = 2
@@ -52,8 +51,7 @@ class Graph:
     @staticmethod
     def parse(graph_str: str):
         g = []
-        input = graph_str.split(';')
-        for part in input:
+        for part in graph_str.split(';'):
             if part != '':
                 GraphParser().parse(part).build(g)
 
@@ -62,7 +60,6 @@ class Graph:
     @staticmethod
     def beautiful_parse(graph_str: str):
         res = Graph.parse(graph_str)
-
         ft = lambda x: 'from ' + str(x[0]) + ' to ' + str(x[1])
         for row in res:
             for e in row:
@@ -70,7 +67,6 @@ class Graph:
                 print("\tFrom:    " + str(e[0]))
                 print("\tTo:      " + str(e[1]))
                 print("\tName:    " + str(e[2]))
-
                 print("\tWeights: " + ft(e[3]))
                 print("\tLength:  " + ft(e[4]))
                 print("\tInclude: " + str(e[5]))

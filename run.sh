@@ -1,3 +1,3 @@
 git add .
-git commit -m "second commit"
+git commit -m "exceptions support commit"
 git push -u origin master

@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a5b922d-5689-4259-881b-9aa66bb9b26c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Token.py" beforeDir="false" afterPath="$PROJECT_DIR$/Token.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gparser.py" beforeDir="false" afterPath="$PROJECT_DIR$/gparser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphbuilder.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphbuilder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,7 +15,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/GraphParser$operations.coverage" NAME="operations Coverage Results" MODIFIED="1551521491329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/GraphParser$test.coverage" NAME="test Coverage Results" MODIFIED="1551530455869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GraphParser$test.coverage" NAME="test Coverage Results" MODIFIED="1551533771676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GraphParser$operations__1_.coverage" NAME="operations (1) Coverage Results" MODIFIED="1551526286619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/parser" />
     <SUITE FILE_PATH="coverage/GraphParser$main.coverage" NAME="main Coverage Results" MODIFIED="1551526365618" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -28,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gparser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
+            <state relative-caret-position="-2237">
+              <caret line="32" column="44" selection-start-line="32" selection-start-column="44" selection-end-line="32" selection-end-column="44" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -43,8 +45,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphbuilder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+            <state relative-caret-position="488">
+              <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -52,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
-              <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+              <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -64,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Token.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="23" lean-forward="true" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+            <state relative-caret-position="267">
+              <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -91,7 +93,6 @@
         <option value="$PROJECT_DIR$/parser/Operation.py" />
         <option value="$PROJECT_DIR$/parser/AddConstantEdge.py" />
         <option value="$PROJECT_DIR$/parser.py" />
-        <option value="$PROJECT_DIR$/Token.py" />
         <option value="$PROJECT_DIR$/GraphParser.py" />
         <option value="$PROJECT_DIR$/parser/main.py" />
         <option value="$PROJECT_DIR$/main.py" />
@@ -99,10 +100,11 @@
         <option value="$PROJECT_DIR$/parser/GraphParser.py" />
         <option value="$PROJECT_DIR$/parser/gparser.py" />
         <option value="$PROJECT_DIR$/parser/operations.py" />
-        <option value="$PROJECT_DIR$/graphbuilder.py" />
         <option value="$PROJECT_DIR$/operations.py" />
-        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/graphbuilder.py" />
+        <option value="$PROJECT_DIR$/Token.py" />
         <option value="$PROJECT_DIR$/gparser.py" />
+        <option value="$PROJECT_DIR$/test.py" />
       </list>
     </option>
   </component>
@@ -264,12 +266,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1551458585123</updated>
-      <workItem from="1551458586420" duration="35862000" />
+      <workItem from="1551458586420" duration="37538000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35862000" />
+    <option name="totallyTimeSpent" value="37538000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -286,7 +288,7 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4305949" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.296034" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -373,10 +375,17 @@
     <entry file="file://$PROJECT_DIR$/parser/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/Token.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/graphbuilder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+        <state relative-caret-position="488">
+          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -390,27 +399,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Token.py">
+    <entry file="file://$PROJECT_DIR$/gparser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="23" lean-forward="true" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+        <state relative-caret-position="-2237">
+          <caret line="32" column="44" selection-start-line="32" selection-start-column="44" selection-end-line="32" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
-          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gparser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
+          <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
         </state>
       </provider>
     </entry>
