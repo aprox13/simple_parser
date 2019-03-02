@@ -21,10 +21,12 @@ class GraphParser:
 
     def __init__(self):
         super().__init__()
-
-        self.__FUNCTIONS = [self.__simple_edge, self.__primary]
+        self.__FUNCTIONS = [self.__edge, self.__primary]
 
     def next_token(self) -> Token:
+        """ Function return next token in expression.
+        :raise ParserException if token is not valid
+        """
         self.__prev_token = self.__token
         tmp = self.__next_token_unchecked()
         if tmp == self.__prev_token:
@@ -34,6 +36,7 @@ class GraphParser:
         return tmp
 
     def __next_token_unchecked(self) -> Token:
+        """ Function return next token in expression. """
         self.__skip_ws()
 
         if self.__size <= self.__index:
@@ -47,6 +50,7 @@ class GraphParser:
             return self.__token
 
         start = self.__index - 1
+        # Unused
         # if symbol.isalpha():
         #     while self.__is_correct_bound() and self.__current().isalpha():
         #         self.__next_char()
@@ -67,46 +71,40 @@ class GraphParser:
         return self.__token
 
     def __skip_ws(self):
+        """ Function which skip all whitespaces from current expression index """
         while self.__is_correct_bound() and self.__expression[self.__index] == ' ':  # ws
             self.__index += 1
 
     def __is_correct_bound(self) -> bool:
+        """ Function check if current index is in bound of expression """
         return self.__index < self.__size
 
     def __next_char(self):
+        """ Increment current expression index """
         self.__index += 1
 
     def __current(self) -> str:
+        """ Current expression char"""
         return self.__expression[self.__index]
 
-    def __parameter(self, new_token: bool):
-        left = self.__next_priority(self.__parameter, new_token)
-        params = []
-        while True:
-            if self.__token == Token.SEPARATOR_EDGE_PARAMS:
-                params.append(left)
-                self.__next_priority(self.__next_priority(self.__parameter, True))
-            else:
-                if len(params) == 0:
-                    return left
-                return params
-
-    def __simple_edge(self, new_token: bool):
-
+    def __edge(self, new_token: bool):
+        """ Function makes new edge"""
         left = self.__primary(new_token)
 
         while True:
             if self.__token == Token.OPEN_EDGE:
                 self.__primary(False)  # parse params
             if self.__token == Token.EDGE:
-                left = SimpleEdge(left, self.__next_priority(self.__simple_edge, True))
+                left = SimpleEdge(left, self.__next_priority(self.__edge, True))
             elif self.__token == Token.P_EDGE:
-                left = ParametrizedEdge(left, self.__next_priority(self.__simple_edge, True), self.__last_params)
+                left = ParametrizedEdge(left, self.__next_priority(self.__edge, True), self.__last_params)
                 self.__last_params = list()
             else:
                 return left
 
     def __primary(self, new_token: bool):
+        """ Primary operations """
+
         if new_token:
             self.__token = self.next_token()
 
@@ -116,6 +114,7 @@ class GraphParser:
             return Const(v)
 
         if self.__token == Token.APOSTROPHE:
+            """ if it's new vertex name"""
             self.__skip_ws()
             start = self.__index
             while self.__current() != Token.APOSTROPHE.value:
@@ -141,20 +140,23 @@ class GraphParser:
             self.__next_char()
             return
 
-        if self.__token == Token.UNIQ:
-            if self.__current() != Token.OPEN_BRACKET.value:
-                self.__raise_wrong_token(self.__index)
-
-            self.__next_char()
-            start = self.__index
-            while self.__is_correct_bound() and self.__current() != ')':
-                self.__next_char()
-            args = [int(x) for x in self.__expression[start:self.__index].split(',')]
-            self.__next_char()
-            self.__token = self.next_token()
-            return Uniq(args)
+        # Unused
+        # if self.__token == Token.UNIQ:
+        #     print("hihihi")
+        #     if self.__current() != Token.OPEN_BRACKET.value:
+        #         self.__raise_wrong_token(self.__index)
+        #
+        #     self.__next_char()
+        #     start = self.__index
+        #     while self.__is_correct_bound() and self.__current() != ')':
+        #         self.__next_char()
+        #     args = [int(x) for x in self.__expression[start:self.__index].split(',')]
+        #     self.__next_char()
+        #     self.__token = self.next_token()
+        #     return Uniq(args)
 
     def __next_priority(self, sender=None, new_token=False):
+        """ helper function: call next priority from sender priority"""
         if sender is not None:
             for i in range(0, len(self.__FUNCTIONS)):
                 if self.__FUNCTIONS[i] == sender:
@@ -162,12 +164,11 @@ class GraphParser:
         return self.__FUNCTIONS[0](new_token)
 
     def __low_priority(self, new_token):
+        """ Call lowest priority operation"""
         return self.__next_priority(new_token=new_token)
 
     def __parse_edge_param(self, params_string: str):
-
-        splited = params_string.split(Token.SEPARATOR_EDGE_PARAMS.value)
-        return [self.__to_param(arg) for arg in splited]
+        return [self.__to_param(arg) for arg in params_string.split(Token.SEPARATOR_EDGE_PARAMS.value)]
 
     def parse(self, base: str):
         self.__expression = base

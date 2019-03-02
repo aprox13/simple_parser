@@ -1,3 +1,3 @@
 git add .
-git commit -m "exceptions support commit"
+git commit -m "docs commit"
 git push -u origin master
