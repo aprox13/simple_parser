@@ -14,6 +14,7 @@ class GraphParser:
     __name = ''
     __value = ''
     __token = Token.FAIL
+    __prev_token = None
 
     __last_params = None
     __FUNCTIONS = []  # array of function pointers. Order sets the priority of operations
@@ -22,11 +23,6 @@ class GraphParser:
         super().__init__()
 
         self.__FUNCTIONS = [self.__simple_edge, self.__primary]
-
-    def parse_from_list(self, base: list):
-        self.__graph = {}
-        for line in base:
-            self.parse(line)
 
     def next_token(self) -> Token:
         self.__skip_ws()
@@ -182,30 +178,26 @@ class GraphParser:
                 ' ' * index + '^' + ' ' * (self.__size - index))
         raise ParseException(message)
 
-    def __to_param(self, arg):
-
+    @staticmethod
+    def __to_param(arg):
         arg = arg.replace(' ', '')
+        if len(arg) == 0:
+            return Len.default()
         token = Token.find(arg[0])
         idx = 0
         while idx < len(arg) and arg[idx] != Token.OPEN_BRACKET.value:
             idx += 1
         start = idx + 1
-
         while idx < len(arg) and arg[idx] != Token.CLOSE_BRACKET.value:
             idx += 1
-
         params_str = arg[start:idx]
-
         if token == Token.GENOM_NAME:
             return GenomeName([params_str])
-
         params = [int(x) for x in params_str.split(',')]
-
         if token == Token.UNIQ:
             return Uniq(params)
         if token == Token.LENGTH:
             return Len(params)
-
         if token == Token.LOCATION:
             return Include(params)
         if token == Token.WEIGHTS:
