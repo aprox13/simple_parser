@@ -1,5 +1,5 @@
 from gparser import GraphParser
-from operations import Weights, Uniq, Include, Len
+from operations import Weights, Uniq, Contains, Len
 
 
 class Graph:
@@ -13,29 +13,29 @@ class Graph:
     def build(self, from_parser: list):
 
         res = [[], []]
-        NAME = 2
-        WEIGHT = 3
-        LEN = 4
-        UNIQ = 6
-        N = 5
+        name_idx = 2
+        weight_idx = 3
+        len_idx = 4
+        uniq_idx = 6
+        contains_idx = 5
 
-        names = set([x[NAME] for x in from_parser])
+        names = set([x[name_idx] for x in from_parser])
         names.remove(None)
         for e in from_parser:
 
-            if e[NAME] is None:
+            if e[name_idx] is None:
                 new_name = self.next_name()
                 while new_name in names:
                     new_name = self.next_name()
-                e[NAME] = new_name
+                e[name_idx] = new_name
 
-            default = [Weights.default().build(None), Len.default().build(None), Include.default().build(None),
+            default = [Weights.default().build(None), Len.default().build(None), Contains.default().build(None),
                        Uniq.default().build(None)]
 
-            for i in [WEIGHT, LEN, N, UNIQ]:
+            for i in [weight_idx, len_idx, contains_idx, uniq_idx]:
                 if e[i] is None:
-                    e[i] = default[i - WEIGHT]
-            simple_edge = (e[LEN] == Len.default().build(None))
+                    e[i] = default[i - weight_idx]
+            simple_edge = (e[len_idx] == Len.default().build(None))
 
             if simple_edge:
                 res[0].append(e)
@@ -60,7 +60,10 @@ class Graph:
     @staticmethod
     def beautiful_parse(graph_str: str):
         res = Graph.parse(graph_str)
-        ft = lambda x: 'from ' + str(x[0]) + ' to ' + str(x[1])
+
+        def ft(x):
+            return 'from ' + str(x[0]) + ' to ' + str(x[1])
+
         for row in res:
             for e in row:
                 print("Edge {")

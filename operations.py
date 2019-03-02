@@ -1,3 +1,6 @@
+from typing import Optional, Any
+
+
 class Operation:
     ID = -1
 
@@ -40,7 +43,8 @@ class ParametrizedEdge(Operation):
         super().__init__(left, right)
         self.__params = params
 
-    def prepare(self, operand: Operation, graph) -> str:
+    @staticmethod
+    def prepare(operand: Operation, graph) -> Optional[Any]:
         if operand is None:
             return None
         if operand.ID == SimpleEdge.ID or operand.ID == ParametrizedEdge.ID:
@@ -54,8 +58,6 @@ class ParametrizedEdge(Operation):
         edge_to = self.prepare(self.right, graph)
 
         self.__params.sort(key=lambda p: p.ID)
-
-        result = [edge_from, edge_to]
 
         # edge ( from, to, name, weights,len, n, uniq)
 
@@ -103,7 +105,7 @@ class Len(Param):
         return Len([1, 1])
 
 
-class Include(Param):
+class Contains(Param):
     ID = 13
 
     def build(self, graph):
@@ -111,7 +113,7 @@ class Include(Param):
 
     @staticmethod
     def default():
-        return Include([])
+        return Contains([])
 
 
 class GenomeName(Param):

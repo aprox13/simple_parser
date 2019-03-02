@@ -1,5 +1,5 @@
 from Token import Token
-from operations import Const, SimpleEdge, Operation, Name, Uniq, ParametrizedEdge, Len, Include, GenomeName, \
+from operations import Const, SimpleEdge, Operation, Name, Uniq, ParametrizedEdge, Len, Contains, GenomeName, \
     Weights
 
 
@@ -142,7 +142,6 @@ class GraphParser:
 
         # Unused
         # if self.__token == Token.UNIQ:
-        #     print("hihihi")
         #     if self.__current() != Token.OPEN_BRACKET.value:
         #         self.__raise_wrong_token(self.__index)
         #
@@ -186,8 +185,7 @@ class GraphParser:
                 ' ' * index + '^' + ' ' * (self.__size - index))
         raise ParseException(message)
 
-    @staticmethod
-    def __to_param(arg):
+    def __to_param(self, arg):
         arg = arg.replace(' ', '')
         if len(arg) == 0:
             return Len.default()
@@ -196,7 +194,10 @@ class GraphParser:
         while idx < len(arg) and arg[idx] != Token.OPEN_BRACKET.value:
             idx += 1
         start = idx + 1
+        idx += 1
         while idx < len(arg) and arg[idx] != Token.CLOSE_BRACKET.value:
+            if arg[idx] == Token.OPEN_BRACKET.value:
+                self.__raise_wrong_token(self.__index, 'Unexpected symbol "(" in params')
             idx += 1
         params_str = arg[start:idx]
         if token == Token.GENOME_NAME:
@@ -207,6 +208,6 @@ class GraphParser:
         if token == Token.LENGTH:
             return Len(params)
         if token == Token.LOCATION:
-            return Include(params)
+            return Contains(params)
         if token == Token.WEIGHTS:
             return Weights(params)
