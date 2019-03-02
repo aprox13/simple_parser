@@ -1,5 +1,5 @@
 from Token import Token
-from operations import Const, SimpleEdge, Operation, Name, Uniq, ParametrizedEdge, Len, Location, GenomeName, \
+from operations import Const, SimpleEdge, Operation, Name, Uniq, ParametrizedEdge, Len, Include, GenomeName, \
     Weights
 
 
@@ -109,12 +109,6 @@ class GraphParser:
             self.__token = self.next_token()
             return Const(v)
 
-        if self.__token == Token.OPEN_BRACKET:
-            op = self.__low_priority(True)
-            if self.__token == Token.CLOSE_BRACKET:
-                return op
-            raise ParseException("Wrong token at " + str(self.__index))
-
         if self.__token == Token.APOSTROPHE:
             self.__skip_ws()
             start = self.__index
@@ -134,6 +128,8 @@ class GraphParser:
             while self.__is_correct_bound() and self.current() != Token.CLOSE_EDGE.value:
                 self.__next_char()
 
+            if not self.__is_correct_bound():
+                raise ParseException("Wrong token at " + str(self.__index))
             self.__last_params = self.__parse_edge_param(self.__expression[start: self.__index])
             self.__token = Token.P_EDGE
             self.__next_char()
@@ -211,6 +207,6 @@ class GraphParser:
             return Len(params)
 
         if token == Token.LOCATION:
-            return Location(params)
+            return Include(params)
         if token == Token.WEIGHTS:
             return Weights(params)

@@ -57,7 +57,7 @@ class ParametrizedEdge(Operation):
 
         result = [edge_from, edge_to]
 
-        # edge ( from, to, name, weights,len, uniq, n)
+        # edge ( from, to, name, weights,len, n, uniq)
 
         result = [edge_from, edge_to, None, None, None, None, None]
 
@@ -88,7 +88,7 @@ class Param(Unary):
 
 
 class Uniq(Param):
-    ID = 13
+    ID = 14
 
     @staticmethod
     def default():
@@ -103,15 +103,15 @@ class Len(Param):
         return Len([1, 1])
 
 
-class Location(Param):
-    ID = 14
+class Include(Param):
+    ID = 13
 
     def build(self, graph):
         return self.args
 
     @staticmethod
     def default():
-        return Location([])
+        return Include([])
 
 
 class GenomeName(Param):
