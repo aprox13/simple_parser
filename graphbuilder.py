@@ -53,5 +53,9 @@ class Graph:
     @staticmethod
     def parse(graph_str: str):
         g = []
-        GraphParser().parse(graph_str).build(g)
+        input = graph_str.split(';')
+        for part in input:
+            if part != '':
+                GraphParser().parse(part).build(g)
+
         return Graph().build(g)
