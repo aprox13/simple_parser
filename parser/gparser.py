@@ -1,6 +1,39 @@
-from Token import Token
-from operations import Const, SimpleEdge, Operation, Name, Uniq, ParametrizedEdge, Len, Contains, GenomeName, \
+from enum import Enum
+
+from parser.operations import Const, SimpleEdge, Operation, Name, Uniq, ParametrizedEdge, Len, Contains, GenomeName, \
     Weights
+
+
+# BioHack2019
+# Belyaev Roman aka aprox13(git)
+
+class Token(Enum):
+    FAIL = 0
+    START = 1
+    END = 2
+    CONST = 4
+    P_EDGE = 5
+    OPEN_EDGE = '{'
+    CLOSE_EDGE = '}'
+    EDGE = '>'
+    OPEN_BRACKET = '('
+    CLOSE_BRACKET = ')'
+    APOSTROPHE = '\''
+
+    # PARAMS
+    SEPARATOR_EDGE_PARAMS = ':'
+    LENGTH = 'l'
+    LOCATION = 'n'
+    WEIGHTS = 'w'
+    GENOME_NAME = 'g'
+    UNIQ = 'u'
+
+    @staticmethod
+    def find(symbol: str):
+        for name, member in Token.__members__.items():
+            if member.value == symbol:
+                return member
+        return Token.FAIL
 
 
 class ParseException(Exception):
@@ -38,30 +71,14 @@ class GraphParser:
     def __next_token_unchecked(self) -> Token:
         """ Function return next token in expression. """
         self.__skip_ws()
-
         if self.__size <= self.__index:
             return Token.END
         symbol = self.__expression[self.__index]
         self.__next_char()
-
         self.__token = Token.find(symbol)
-
         if self.__token != Token.FAIL:
             return self.__token
-
         start = self.__index - 1
-        # Unused
-        # if symbol.isalpha():
-        #     while self.__is_correct_bound() and self.__current().isalpha():
-        #         self.__next_char()
-        #
-        #     string = self.__expression[start: self.__index]
-        #     token = Token.find(string)
-        #     if token == Token.FAIL:
-        #         self.__name = string
-        #         return Token.NAME
-        #     return token
-
         if symbol.isdigit():
             while self.__is_correct_bound() and self.__current().isdigit():
                 self.__next_char()
@@ -87,10 +104,9 @@ class GraphParser:
         """ Current expression char"""
         return self.__expression[self.__index]
 
-    def __edge(self, new_token: bool):
+    def __edge(self, new_token: bool) -> Operation:
         """ Function makes new edge"""
         left = self.__primary(new_token)
-
         while True:
             if self.__token == Token.OPEN_EDGE:
                 self.__primary(False)  # parse params
@@ -102,17 +118,15 @@ class GraphParser:
             else:
                 return left
 
-    def __primary(self, new_token: bool):
+    def __primary(self, new_token: bool) -> Operation:
         """ Primary operations """
-
         if new_token:
             self.__token = self.next_token()
-
         if self.__token == Token.CONST:
+            print("hello'w")
             v = self.__value
             self.__token = self.next_token()
             return Const(v)
-
         if self.__token == Token.APOSTROPHE:
             """ if it's new vertex name"""
             self.__skip_ws()
@@ -122,7 +136,6 @@ class GraphParser:
 
             if not self.__is_correct_bound():
                 raise ParseException("Wrong token at " + str(self.__index))
-
             new_name = self.__expression[start: self.__index]
             self.__next_char()
             self.__token = self.next_token()
@@ -132,27 +145,12 @@ class GraphParser:
             start = self.__index
             while self.__is_correct_bound() and self.__current() != Token.CLOSE_EDGE.value:
                 self.__next_char()
-
             if not self.__is_correct_bound():
                 raise ParseException("Wrong token at " + str(self.__index))
             self.__last_params = self.__parse_edge_param(self.__expression[start: self.__index])
             self.__token = Token.P_EDGE
             self.__next_char()
             return
-
-        # Unused
-        # if self.__token == Token.UNIQ:
-        #     if self.__current() != Token.OPEN_BRACKET.value:
-        #         self.__raise_wrong_token(self.__index)
-        #
-        #     self.__next_char()
-        #     start = self.__index
-        #     while self.__is_correct_bound() and self.__current() != ')':
-        #         self.__next_char()
-        #     args = [int(x) for x in self.__expression[start:self.__index].split(',')]
-        #     self.__next_char()
-        #     self.__token = self.next_token()
-        #     return Uniq(args)
 
     def __next_priority(self, sender=None, new_token=False):
         """ helper function: call next priority from sender priority"""
@@ -171,13 +169,10 @@ class GraphParser:
 
     def parse(self, base: str):
         self.__expression = base
-        self.__size = base.__len__()
-
+        self.__size = len(base)
         self.__token = self.next_token()
-
         while self.__index < self.__size and self.__token == Token.FAIL:
             self.__token = self.next_token()
-
         return Operation() if self.__token == Token.END else self.__next_priority(None, False)
 
     def __raise_wrong_token(self, index: int, message=''):
@@ -211,3 +206,4 @@ class GraphParser:
             return Contains(params)
         if token == Token.WEIGHTS:
             return Weights(params)
+        self.__raise_wrong_token(message="Unexpected argument " + arg[0], index=self.__index)

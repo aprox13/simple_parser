@@ -1,5 +1,6 @@
 from typing import Optional, Any
 
+
 # BioHack2019
 # Belyaev Roman aka aprox13
 
@@ -136,4 +137,3 @@ class Weights(Param):
     def default():
         return Weights([1, -1])
 
-# print(Graph.parse("'-1' > '0' {w(0,100):g(X_0)} '1' {u(20, 100):l(0, 100)} '2' {u(20, 100):n(1, 2, 3, 4, 5, 6, 7)}"))

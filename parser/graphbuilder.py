@@ -1,8 +1,12 @@
-from gparser import GraphParser
-from operations import Weights, Uniq, Contains, Len
+from parser.gparser import GraphParser
+from parser.operations import Weights, Uniq, Contains, Len
 
+
+# BioHack2019
+# Belyaev Roman aka aprox13(git)
 
 class Graph:
+    """ Class for build graph to algorithm """
 
     def __init__(self):
         self.name_idx = 0
@@ -59,6 +63,7 @@ class Graph:
 
     @staticmethod
     def beautiful_parse(graph_str: str):
+        """ beautiful output """
         res = Graph.parse(graph_str)
 
         def ft(x):
