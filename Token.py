@@ -1,5 +1,7 @@
 from enum import Enum
 
+# BioHack2019
+# Belyaev Roman aka aprox13
 
 class Token(Enum):
     FAIL = 0

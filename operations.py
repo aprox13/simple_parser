@@ -1,5 +1,7 @@
 from typing import Optional, Any
 
+# BioHack2019
+# Belyaev Roman aka aprox13
 
 class Operation:
     ID = -1
